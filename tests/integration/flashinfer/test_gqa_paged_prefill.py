@@ -152,6 +152,7 @@ def test_gqa_paged_prefill_adapter_substitution(tmp_path, monkeypatch):
         kv_indptr,
         kv_indices,
         kv_last_page_len,
+        
         H_q,
         H_kv,
         D,
