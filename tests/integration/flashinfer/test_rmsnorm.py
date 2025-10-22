@@ -1,6 +1,4 @@
-import sys
 
-import pytest
 import torch
 
 from flashinfer_bench.apply import ApplyConfig, ApplyRuntime, set_apply_runtime
@@ -25,7 +23,6 @@ from flashinfer_bench.data import (
 )
 
 
-@pytest.mark.skipif(sys.version_info < (3, 9), reason="Flashinfer requires Python 3.9+")
 def test_rmsnorm_adapter_substitution(tmp_path, monkeypatch):
     """
     Integration-style test that mirrors test_ragged_prefill_adapter_substitution.
