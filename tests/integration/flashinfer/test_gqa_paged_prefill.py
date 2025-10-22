@@ -1,4 +1,5 @@
 import math
+import sys
 
 import pytest
 import torch
@@ -25,6 +26,7 @@ from flashinfer_bench.data import (
 )
 
 
+@pytest.mark.skipif(sys.version_info < (3, 9), reason="Flashinfer requires Python 3.9+")
 @pytest.mark.skipif(torch.cuda.device_count() == 0, reason="CUDA devices not available")
 def test_gqa_paged_prefill_adapter_substitution(tmp_path, monkeypatch):
     import flashinfer  # type: ignore
