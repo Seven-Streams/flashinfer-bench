@@ -24,7 +24,9 @@ from flashinfer_bench.data import (
     save_jsonl_file,
 )
 
-
+@pytest.mark.skipif(
+    __import__("torch").cuda.device_count() == 0, reason="CUDA devices not available"
+)
 def test_run_all_empty_traceset(tmp_path: Path):
     """Test run_all with completely empty trace set."""
     trace_set = TraceSet(root=str(tmp_path), definitions={}, solutions={}, workloads={}, traces={})
@@ -37,7 +39,9 @@ def test_run_all_empty_traceset(tmp_path: Path):
     assert len(result.workloads) == 0
     assert len(result.traces) == 0
 
-
+@pytest.mark.skipif(
+    __import__("torch").cuda.device_count() == 0, reason="CUDA devices not available"
+)
 def test_run_all_no_solutions(tmp_path: Path, caplog):
     """Test run_all with definitions but no solutions."""
     # Create definition
@@ -69,7 +73,9 @@ def test_run_all_no_solutions(tmp_path: Path, caplog):
     assert "No solutions found for def=test_def, skipping definition" in caplog.text
     assert len(result.traces) == 0
 
-
+@pytest.mark.skipif(
+    __import__("torch").cuda.device_count() == 0, reason="CUDA devices not available"
+)
 def test_run_all_no_workloads(tmp_path: Path):
     """Test run_all with definitions and solutions but no workloads."""
     # Create definition
@@ -108,7 +114,9 @@ def test_run_all_no_workloads(tmp_path: Path):
 
     assert len(result.traces) == 0
 
-
+@pytest.mark.skipif(
+    __import__("torch").cuda.device_count() == 0, reason="CUDA devices not available"
+)
 def test_dump_traces_false(tmp_path: Path):
     """Test run_all with dump_traces=False."""
     trace_set = TraceSet(root=str(tmp_path), definitions={}, solutions={}, workloads={}, traces={})
